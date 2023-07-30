@@ -3,11 +3,13 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function MainLayout() {
-  return (
-    <div>
-      <Navbar />
-        <Outlet />
-        <Footer/>
-    </div>
-  );
+	return (
+		<div>
+			<Navbar />
+			<div className="h-screen">
+				<Outlet />
+			</div>
+			<Footer />
+		</div>
+	);
 }
