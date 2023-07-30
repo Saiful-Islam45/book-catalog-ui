@@ -1,6 +1,13 @@
-const App = () => {
+import Toaster from './components/ui/Toaster';
+import MainLayout from './layout/MainLayout';
+
+function App() {
   return (
-    <h5 className="bg-red-500 text-3xl font-bold underline">App</h5>
-  )
+    <div>
+      <Toaster message=''/>
+      <MainLayout />
+    </div>
+  );
 }
-export default App
+
+export default App;

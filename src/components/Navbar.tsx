@@ -1,7 +1,7 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 
-const Home = () => {
+const Navbar = () => {
   const books = [
     {
       id: 1,
@@ -19,25 +19,59 @@ const Home = () => {
       genre: 'Fantasy',
       imageUrl: '/path/to/book2.jpg',
     },
+    // Add more books as needed
   ];
 
+  // Placeholder data for filter options
   const genres = ['All Genres', 'Fiction', 'Fantasy', 'Mystery', 'Sci-Fi'];
   const publicationYears = ['All Years', '2022', '2021', '2020', '2019'];
 
+  // State for selected filter options
   const [selectedGenre, setSelectedGenre] = useState('All Genres');
   const [selectedYear, setSelectedYear] = useState('All Years');
-  const handleGenreChange = (selectedOption: SetStateAction<string>) => {
+
+  // Handler for genre filter change
+  const handleGenreChange = (selectedOption) => {
     setSelectedGenre(selectedOption);
   };
 
-  const handleYearChange = (selectedOption: SetStateAction<string>) => {
+  // Handler for publication year filter change
+  const handleYearChange = (selectedOption) => {
     setSelectedYear(selectedOption);
   };
+
+
+  // State for search input
+  const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate()
 
+  // Handler for search input change
+  const handleSearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // Handler for search form submit
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // Perform search based on searchInput and selected filter
+    // Implement your search logic here
+  };
+
+  // Placeholder for the user's login status
+  const isLoggedIn = false; // Change this based on actual user authentication
+
+  // State for controlling the visibility of the submenu
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+
+  // Handler for toggling the submenu
+  const handleSubmenuToggle = () => {
+    setIsSubmenuOpen((prevState) => !prevState);
+  };
+
   return (
-    <div className='h-screen'>
+    <>
     <div className="flex p-4 bg-gray-100">
+        {/* Genre Dropdown */}
         <div className="mr-4">
           <label className="font-semibold">Genre:</label>
           <select
@@ -52,6 +86,8 @@ const Home = () => {
             ))}
           </select>
         </div>
+
+        {/* Publication Year Dropdown */}
         <div>
           <label className="font-semibold">Publication Year:</label>
           <select
@@ -68,7 +104,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 p-4 bg-cyan">
+      {/* Book Cards (Right Side) */}
+      <div className="grid grid-cols-3 gap-4 p-4">
         {books.map((book) => (
           <div
             key={book.id}
@@ -90,8 +127,8 @@ const Home = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default Navbar;
