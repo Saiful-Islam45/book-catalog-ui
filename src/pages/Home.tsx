@@ -1,5 +1,6 @@
 import { SetStateAction, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { defaultImg } from '../types/book';
 
 const Home = () => {
 	const books = [
@@ -22,7 +23,7 @@ const Home = () => {
 	];
 
 	const genres = ['All Genres', 'Fiction', 'Fantasy', 'Mystery', 'Sci-Fi'];
-	const publicationYears = ['All Years', '2022', '2021', '2020', '2019'];
+	const publicationYears = ['All Years','2023', '2022', '2021', '2020', '2019'];
 
 	const [selectedGenre, setSelectedGenre] = useState('All Genres');
 	const [selectedYear, setSelectedYear] = useState('All Years');
@@ -68,17 +69,13 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-3 gap-4 px-8 bg-cyan">
+			<div className="grid grid-cols-4 gap-4 px-8 bg-cyan">
 				{books.map((book) => (
 					<div
 						key={book.id}
 						className="bg-white p-4 border rounded-md shadow-md hover:shadow-lg transition-shadow"
 					>
-						<img
-							src={book.imageUrl}
-							alt={book.title}
-							className="h-40 w-full object-cover mb-4 rounded-md"
-						/>
+						<img className="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt={book.title}/>
 						<div className="text-lg font-semibold">{book.title}</div>
 						<div className="text-gray-500">{book.author}</div>
 						<div className="text-gray-500">{book.publicationYear}</div>

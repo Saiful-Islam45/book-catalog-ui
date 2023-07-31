@@ -1,3 +1,5 @@
+import { defaultImg } from "../types/book";
+
 const BookDetailsPage = () => {
 	const book = {
 		id: 1,
@@ -5,7 +7,7 @@ const BookDetailsPage = () => {
 		author: 'Author 1',
 		publicationYear: '2022',
 		genre: 'Fiction',
-		imageUrl: '/path/to/book1.jpg',
+		imageUrl: defaultImg,
 	};
 	return (
 		<>
