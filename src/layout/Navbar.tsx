@@ -1,7 +1,19 @@
 import { SetStateAction, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/middlewares/hook";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../config/auth";
+import { setUser } from "../redux/features/userSlice";
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+
+  const { user } = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const isLoggedIn = false;
 
   const handleSearchInputChange = (e: {
     target: { value: SetStateAction<string> };
@@ -13,12 +25,15 @@ const Navbar = () => {
     e.preventDefault();
   };
 
-  const isLoggedIn = false;
-
-  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
-
   const handleSubmenuToggle = () => {
     setIsSubmenuOpen(prevState => !prevState);
+  };
+
+  const handleLogout = () => {
+    console.log("==============auth=============", auth);
+    signOut(auth).then(() => {
+      dispatch(setUser(null));
+    });
   };
   return (
     <nav className="flex items-center justify-between p-4 bg-cyan text-black">
@@ -88,12 +103,32 @@ const Navbar = () => {
         <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
           All Books
         </button>
-				<button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
+        <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
           Wish List
         </button>
-        <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in">
-          {isLoggedIn ? "Profile" : "Login/Signup"}
-        </button>
+        {!user.email ? (
+          <>
+            <button
+              onClick={() => navigate("/signup")}
+              className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
+            >
+              Signup
+            </button>
+            <button
+              onClick={() => navigate("/login")}
+              className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
+            >
+              Login
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

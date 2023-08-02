@@ -1,18 +1,18 @@
 import { useState } from 'react';
+import { useAppDispatch } from '../redux/middlewares/hook';
+import { createUser } from '../redux/features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const dispatch= useAppDispatch()
+  const navigate= useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-
+    
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setError('Invalid email or password');
-    }, 1500);
+    dispatch(createUser({ email, password}))
+    navigate('/')
   };
 
   return (
@@ -48,13 +48,12 @@ const LoginForm = () => {
               required
             />
           </div>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          
           <button
             type="submit"
             className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
-            disabled={isSubmitting}
           >
-            {isSubmitting ? 'Logging in...' : 'Login'}
+            Login
           </button>
         </form>
       </div>

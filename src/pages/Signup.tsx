@@ -1,19 +1,20 @@
 import { useState } from "react";
+import { useAppDispatch } from "../redux/middlewares/hook";
+import { loginUser } from "../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const dispatch= useAppDispatch();
+  const navigate = useNavigate()
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setError('Signup failed');
-    }, 1500);
+    dispatch(loginUser({email, password}))
+    navigate('/')
   };
 
   return (
