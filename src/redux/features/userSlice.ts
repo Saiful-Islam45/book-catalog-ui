@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../config/auth';
 
-interface IUserState {
+interface IUser {
   user: {
     email: string | null;
   };
@@ -20,7 +20,7 @@ interface ICredential {
   password: string;
 }
 
-const initialState: IUserState = {
+const initialState: IUser = {
   user: {
     email: null,
   },

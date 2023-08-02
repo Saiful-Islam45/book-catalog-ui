@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/v1" }),
   endpoints: builder => ({
     getBooks: builder.query({
       query: () => "/books"
@@ -12,16 +12,22 @@ export const api = createApi({
     }),
     addNewBook: builder.mutation({
       query: ({ ...data }) => ({
-        url: "/add-new",
+        url: "/books/add-new-book",
         method: "POST",
         body: data
       })
     }),
     updateBook: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: "/update-book",
+        url: `/books/${id}`,
         method: "PATCH",
         body: data
+      })
+    }),
+    deleteBook: builder.mutation({
+      query: (id: string) => ({
+        url: `/books/${id}`,
+        method: "DELETE",
       })
     })
   })
@@ -31,5 +37,6 @@ export const {
   useGetBooksQuery,
   useGetSingleBookQuery,
   useAddNewBookMutation,
-  useUpdateBookMutation
+  useUpdateBookMutation,
+  useDeleteBookMutation
 } = api;

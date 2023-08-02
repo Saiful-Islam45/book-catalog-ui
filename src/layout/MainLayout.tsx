@@ -6,7 +6,7 @@ export default function MainLayout() {
 	return (
 		<div>
 			<Navbar />
-			<div className="h-screen">
+			<div className="h-screen bg-gray-100">
 				<Outlet />
 			</div>
 			<Footer />

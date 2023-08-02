@@ -13,8 +13,6 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isLoggedIn = false;
-
   const handleSearchInputChange = (e: {
     target: { value: SetStateAction<string> };
   }) => {
@@ -30,7 +28,6 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    console.log("==============auth=============", auth);
     signOut(auth).then(() => {
       dispatch(setUser(null));
     });
@@ -38,7 +35,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between p-4 bg-cyan text-black">
       <div className="flex items-center">
-        <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <a onClick={() => navigate('/')} className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -51,7 +48,7 @@ const Navbar = () => {
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">Saif Book Store</span>
+          <span onClick={() => navigate('/')} className="ml-3 text-xl">Saif Book Store</span>
         </a>
       </div>
 
@@ -77,58 +74,60 @@ const Navbar = () => {
       </form>
 
       <div className="flex items-center relative">
-        {isLoggedIn && (
-          <div className="relative">
-            <button
-              onClick={handleSubmenuToggle}
-              className="px-4 py-2 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
-            >
-              Profile
-            </button>
-            {isSubmenuOpen && (
-              <ul className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg animate-fade-in">
-                <li className="py-2 px-4 hover:bg-gray-100 animate-slide-in">
-                  Wishlist
-                </li>
-                <li className="py-2 px-4 hover:bg-gray-100 animate-slide-in">
-                  Logout
-                </li>
-                <li className="py-2 px-4 hover:bg-gray-100 animate-slide-in">
-                  Accoxsaahhunt
-                </li>
-              </ul>
-            )}
-          </div>
-        )}
         <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
           All Books
         </button>
         <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
           Wish List
         </button>
-        {!user.email ? (
-          <>
-            <button
-              onClick={() => navigate("/signup")}
-              className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
-            >
-              Signup
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
-            >
-              Login
-            </button>
-          </>
-        ) : (
+        <div className="relative">
           <button
-            onClick={handleLogout}
-            className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md mr-2 animate-fade-in"
+            onClick={handleSubmenuToggle}
+            className="px-4 py-2 text-sm text-white rounded-md mr-2 animate-fade-in"
           >
-            Logout
+            <div className="relative w-10 h-10 overflow-hidden border-2 border-oceanblue bg-gray-100 rounded-full dark:bg-gray-600">
+              <svg
+                className="absolute w-12 h-12 text-gray-400 -left-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
           </button>
-        )}
+          {isSubmenuOpen && (
+            <ul className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg animate-fade-in">
+              {!user.email ? (
+                <>
+                  <li
+                    onClick={() => navigate("/login")}
+                    className="py-2 px-4 text-center cursor-pointer border-spacing-y-1 border hover:bg-gray-100 animate-slide-in"
+                  >
+                    Login
+                  </li>
+                  <li
+                    onClick={() => navigate("/signup")}
+                    className="py-2 px-4 text-center hover:bg-gray-100 cursor-pointer border-spacing-y-1 border animate-slide-in"
+                  >
+                    Signup
+                  </li>
+                </>
+              ) : (
+                <li
+                  onClick={handleLogout}
+                  className="py-2 px-4 cursor-pointer text-center hover:bg-gray-100 animate-slide-in"
+                >
+                  Logout
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </nav>
   );
