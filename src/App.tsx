@@ -5,6 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch } from "./redux/middlewares/hook";
 import { setLoading, setUser } from "./redux/features/userSlice";
 import { useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -24,7 +26,7 @@ function App() {
 
   return (
     <div>
-      <Toaster message="" />
+      <ToastContainer/>
       <MainLayout />
     </div>
   );

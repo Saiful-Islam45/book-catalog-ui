@@ -10,5 +10,5 @@ export interface IBook {
     updatedAt?: string;
 }
 
-export const defaultImg = "https://i.ibb.co/DYqQzbP/b7c2f1c0889652a666402f0222ae38bc.jpg"
+export const defaultImg = "https://dummyimage.com/720x400"
 export const dummyImg = "https://dummyimage.com/1205x505"

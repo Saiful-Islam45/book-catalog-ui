@@ -74,6 +74,9 @@ const Navbar = () => {
       </form>
 
       <div className="flex items-center relative">
+      <button onClick={() => navigate('/update-add-book')} className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
+          Add New Book
+        </button>
         <button className="px-4 py-2 mx-1 text-sm text-white bg-oceanblue rounded-md animate-fade-in">
           All Books
         </button>
