@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../config/auth';
 
-interface IUser {
+export interface IUser {
   user: {
     email: string | null;
   };

@@ -1,25 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { IBook } from "../../types/book";
 
-const initialState:IBook[] = [{
-    _id:"00000111",
-    title:"Book one title",
-    author:"book one author",
-    genre:"Fiction",
-    publicationYear: "2023",
-    reviews:[],
-    authorInfo:"64b109aa48821d0ef30fb031",
-    createdAt:"2023-07-14T09:11:04.302Z",
-    updatedAt:"2023-07-14T09:11:04.302Z"
-}]
+export interface IState {
+  books: IBook[];
+}
+
+const initialState: IState = {
+  books: []
+};
 const bookSlice = createSlice({
-    name: "Book",
-    initialState,
-    reducers: {
-        addNewBook: () =>{}
+  name: "Book",
+  initialState,
+  reducers: {
+    setAllBooks: (state, action: PayloadAction<IBook[]>) => {
+      state.books = action.payload;
     }
-})
+  }
+});
 
-export const { addNewBook }= bookSlice.actions
+export const { setAllBooks } = bookSlice.actions;
 
-export default bookSlice.reducer
+export default bookSlice.reducer;

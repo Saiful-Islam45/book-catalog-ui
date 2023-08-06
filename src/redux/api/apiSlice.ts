@@ -6,7 +6,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/v1" }),
   endpoints: builder => ({
     getBooks: builder.query({
-      query: () => "/books",
+      query: (filterQuery: string='') => `/books${filterQuery}`,
       providesTags: ["books"]
     }),
     getSingleBook: builder.query({
@@ -18,7 +18,8 @@ export const api = createApi({
         url: "/books/add-new-book",
         method: "POST",
         body: data
-      })
+      }),
+      invalidatesTags:  ["books"]
     }),
     updateBook: builder.mutation({
       query: ({ id, ...data }) => ({

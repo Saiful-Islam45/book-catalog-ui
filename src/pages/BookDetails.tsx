@@ -5,12 +5,14 @@ import { useState } from "react";
 import Loader from "../components/ui/Loader";
 import DeletePopup from "../components/ui/DeletePopup";
 import ReviewList from "../components/ReviewList";
+import { useAppSelector } from "../redux/middlewares/hook";
 
 const BookDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetSingleBookQuery(id!);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const {user} =useAppSelector(state => state.user)
 
   const book: IBook = data?.data;
 
@@ -38,22 +40,30 @@ const BookDetailsPage = () => {
             </p>
 
             <div className="mt-4 space-x-2">
-              <button
-                onClick={() => navigate("/update-add-book", { state: book })}
-                className="px-4 py-2 bg-oceanblue text-white font-bold rounded hover:bg-blue-600 focus:outline-none"
-              >
-                Edit Book
-              </button>
-              <button
-                onClick={() => setShowDeletePopup(true)}
-                className="px-4 py-2 bg-red-500 text-white font-bold rounded hover:bg-red-600 focus:outline-none"
-              >
-                Delete Book
-              </button>
+              {user.email === book.authorInfo && (
+                <>
+                  <button
+                    onClick={() =>
+                      navigate("/update-add-book", { state: book })
+                    }
+                    className="px-4 py-2 bg-oceanblue text-white font-bold rounded hover:bg-blue-600 focus:outline-none"
+                  >
+                    Edit Book
+                  </button>
+                  <button
+                    onClick={() => setShowDeletePopup(true)}
+                    className="px-4 py-2 bg-red-500 text-white font-bold rounded hover:bg-red-600 focus:outline-none"
+                  >
+                    Delete Book
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
-        <div className="mx-2"><ReviewList reviews={book?.reviews} bookId={id as string}/></div>
+        <div className="mx-2">
+          <ReviewList reviews={book?.reviews} bookId={id as string} />
+        </div>
       </div>
 
       {showDeletePopup && (

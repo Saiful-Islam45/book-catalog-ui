@@ -3,11 +3,11 @@ import Books from "../components/BookCard";
 import { useGetBooksQuery } from "../redux/api/apiSlice";
 import { genres, publicationYears } from "../types/book";
 
-const Home = () => {
+const AllBooks = () => {
   const [selectedGenre, setSelectedGenre] = useState("All Genres");
   const [selectedYear, setSelectedYear] = useState("All Years");
 
-  const { data, isLoading } = useGetBooksQuery(`?`);
+  const { data, isLoading } = useGetBooksQuery(`?itam=all&${selectedGenre ? '': ''}`);
   const handleGenreChange = (selectedOption: SetStateAction<string>) => {
     setSelectedGenre(selectedOption);
   };
@@ -54,4 +54,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AllBooks;

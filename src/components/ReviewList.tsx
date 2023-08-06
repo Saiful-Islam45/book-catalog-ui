@@ -40,7 +40,7 @@ const ReviewList = (props: IReviews) => {
           <textarea
             value={newReview}
             onChange={e => setNewReview(e.target.value)}
-            className="border border-gray-300 rounded-md px-4 py-2 w-full h-32 focus:outline-none focus:ring focus:border-blue-500 resize-none"
+            className="border border-gray-300 rounded-md px-4 py-2 w-full h-10 focus:outline-none focus:ring focus:border-blue-500 resize-none"
             placeholder="Write a review..."
           />
           <button

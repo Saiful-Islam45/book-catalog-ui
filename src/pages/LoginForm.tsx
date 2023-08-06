@@ -20,7 +20,7 @@ const LoginForm = () => {
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
       <div className="px-6 py-4">
-        <h2 className="text-2xl font-bold mb-2">Signup</h2>
+        <h2 className="text-2xl font-bold mb-2">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
@@ -53,10 +53,10 @@ const LoginForm = () => {
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-oceanblue text-white font-bold py-2 px-4 rounded hover:bg-green-600 focus:outline-none"
+            className="w-full bg-oceanblue text-white font-bold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Signing up...' : 'Sign Up'}
+            {isSubmitting ? 'Logging...' : 'Login'}
           </button>
         </form>
       </div>
