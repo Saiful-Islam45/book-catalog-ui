@@ -37,7 +37,7 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.6",
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/node": "^20.4.5",
+    "@types/node": "^20.4.8",
     "@types/redux-logger": "^3.0.9",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",

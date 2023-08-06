@@ -9,7 +9,7 @@ export interface IBook {
     createdAt?: string;
     updatedAt?: string;
 }
-export const genres = ['All Genres', 'Fiction', 'Fantasy', 'Mystery', 'Sci-Fi'];
+export const genres = ['All Genres', 'fiction', 'fantasy', 'mystery'];
 export const publicationYears = ['All Years','2023', '2022', '2021', '2020', '2019'];
 
 export const defaultImg = "https://dummyimage.com/720x400"

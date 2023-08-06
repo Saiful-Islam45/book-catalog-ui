@@ -8,7 +8,7 @@ import { addToWishlist } from "../redux/features/WishSlice";
 
 const Books = ({books, isLoading}: {books: IBook[], isLoading: boolean}) => {
   const navigate = useNavigate();
-  const { wishlist } = useAppSelector(state => state);
+  const { wishlist, user } = useAppSelector(state => state);
   const dispatch = useAppDispatch();
 
   const [favoriteBooks, setFavoriteBooks] = useState<IBook[]>(wishlist.books || []);
@@ -41,12 +41,12 @@ const Books = ({books, isLoading}: {books: IBook[], isLoading: boolean}) => {
             src={defaultImg}
             alt={book.title}
           />
-          <button
+          {user.user.email && <button
             className={`absolute top-2 right-2 btn p-2`}
             onClick={() => toggleFavorite(book)}
           >
              <HeartSVG filled={favoriteBooks.some((favBook) => favBook._id === book._id)} />
-          </button>
+          </button>}
           <div className="text-lg font-semibold">{book.title}</div>
           <div className="text-gray-500">
             <b>Author</b>: {book.author}

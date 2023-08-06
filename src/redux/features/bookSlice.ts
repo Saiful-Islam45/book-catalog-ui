@@ -13,7 +13,7 @@ const bookSlice = createSlice({
   name: "Book",
   initialState,
   reducers: {
-    setAllBooks: (state, action: PayloadAction<IBook[]>) => {
+    setAllBooks: (state: IState, action: PayloadAction<IBook[]>) => {
       state.books = action.payload;
     }
   }

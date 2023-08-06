@@ -14,7 +14,7 @@ const wishSlice = createSlice({
   name: 'Wishlist',
   initialState,
   reducers: {
-    addToWishlist: (state, action: PayloadAction<IBook>) => {
+    addToWishlist: (state: IWishList, action: PayloadAction<IBook>) => {
       const existing = state.books.find(
         (wishlist) => wishlist._id === action.payload._id
       );
@@ -26,9 +26,12 @@ const wishSlice = createSlice({
         state.books.push(action.payload)
       }
     },
+    removeWishList: () => {
+      return initialState
+    }
   },
 });
 
-export const { addToWishlist } = wishSlice.actions;
+export const { addToWishlist, removeWishList } = wishSlice.actions;
 
 export default wishSlice.reducer;

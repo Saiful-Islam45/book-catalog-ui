@@ -5,15 +5,17 @@ import userSlice from "./features/userSlice";
 import wishSlice from "./features/WishSlice";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import filterSlice from "./features/filterSlice";
 
 const persistConfig = {
-    key: 'root', // Root key for local storage
+    key: 'root',
     storage,
   };
   const rootReducer = combineReducers({
     book: bookSlice,
     user: userSlice,
     wishlist: wishSlice,
+    filter: filterSlice,
     [api.reducerPath]: api.reducer,
   });
   
@@ -21,7 +23,7 @@ const persistConfig = {
 
 const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => 
+    middleware: (getDefaultMiddleware: () => string | any[]) => 
         getDefaultMiddleware().concat(api.middleware),
 })
 
