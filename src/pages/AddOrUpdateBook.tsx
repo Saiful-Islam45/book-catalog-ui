@@ -7,6 +7,7 @@ import {
 import { toast } from "react-toastify";
 import { useAppSelector } from "../redux/middlewares/hook";
 import { genres, publicationYears } from "../types/book";
+import { capitalizeFirstLetter } from "../utils/CapitalizedFirstletter";
 const AddOrUpdateBook = () => {
   const { state: book } = useLocation();
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const AddOrUpdateBook = () => {
 
   const handleAddBook = () => {
     if (book) {
-      updateBook({ id: book._id, ...newBook })
+      updateBook({ _id: book._id, ...newBook })
         .then(() => {
           toast.success("Book updated successfully!");
           navigate(`/bookdetails/${book._id}`, { replace: true });
@@ -73,7 +74,7 @@ const AddOrUpdateBook = () => {
         >
           {genres.map(genre => (
             <option key={genre} value={genre}>
-              {genre}
+              {capitalizeFirstLetter(genre)}
             </option>
           ))}
         </select>

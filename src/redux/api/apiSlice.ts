@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IBook } from "../../types/book";
 
 export const api = createApi({
   reducerPath: "api",
   tagTypes: ["books", "reviews"],
-  baseQuery: fetchBaseQuery({ baseUrl: "https://book-catalog-backend-saiful-islam45.vercel.app/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL}),
   endpoints: builder => ({
     getBooks: builder.query({
       query: (filterQuery: string='') => `/books${filterQuery}`,
@@ -22,8 +23,8 @@ export const api = createApi({
       invalidatesTags:  ["books"]
     }),
     updateBook: builder.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/books/${id}`,
+      query: ({ _id, ...data }: Partial<IBook>) => ({
+        url: `/books/${_id}`,
         method: "PATCH",
         body: data
       }),

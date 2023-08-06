@@ -13,18 +13,19 @@ const ReviewList = (props: IReviews) => {
   const { user } = useAppSelector(state => state.user);
   const [updateBook, { }] = useUpdateBookMutation();
 
-  const handleAddReview = () => {
- 
-    const withNewReview = [...props.reviews, newReview];
-    updateBook({ id: props.bookId, reviews: withNewReview })
+  console.log("newReview:", newReview);
+  const handleAddReview = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    updateBook({ _id: props.bookId, reviews: [...props.reviews, newReview] })
     .then(() => {
       toast.success("Review added successfully!");
+      setNewReview("")
     })
     .catch((error: any) => {
-      console.error("Error during put review:", error);
       toast.error("Error during put review.");
+      setNewReview("")
+      console.error("Error during put review:", error);
     });
-    setNewReview("")
   };
 
   return (
@@ -36,7 +37,7 @@ const ReviewList = (props: IReviews) => {
         </div>
       ))}
       {user.email ? (
-        <form onSubmit={handleAddReview} className="mt-4">
+        <form onSubmit={(e:React.FormEvent<HTMLFormElement>) => handleAddReview(e)} className="mt-4">
           <textarea
             value={newReview}
             onChange={e => setNewReview(e.target.value)}

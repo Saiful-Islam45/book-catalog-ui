@@ -1,4 +1,3 @@
-import Toaster from "./components/ui/Toaster";
 import { auth } from "./config/auth";
 import MainLayout from "./layout/MainLayout";
 import { onAuthStateChanged } from "firebase/auth";

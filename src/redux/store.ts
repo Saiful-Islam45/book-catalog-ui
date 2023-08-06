@@ -23,7 +23,7 @@ const persistConfig = {
 
 const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware: () => string | any[]) => 
+    middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(api.middleware),
 })
 
