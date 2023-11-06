@@ -14,11 +14,11 @@ const SignupForm = () => {
 		e.preventDefault();
 		// @ts-ignore
 		dispatch(createUser({ email, password })).then(() => {
-      toast.success("User signed up successfully")
-      navigate('/')
-    }).catch(() => {
-      toast.error("Failed to sign up user");
-    })
+			toast.success("User signed up successfully")
+			navigate('/')
+		}).catch(() => {
+			toast.error("Failed to sign up user");
+		})
 	};
 
 	return (
