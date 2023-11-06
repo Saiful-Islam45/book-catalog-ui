@@ -13,7 +13,6 @@ const ReviewList = (props: IReviews) => {
   const { user } = useAppSelector(state => state.user);
   const [updateBook, { }] = useUpdateBookMutation();
 
-  console.log("newReview:", newReview);
   const handleAddReview = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     updateBook({ _id: props.bookId, reviews: [...props.reviews, newReview] })
